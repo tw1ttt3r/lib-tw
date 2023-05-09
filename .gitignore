@@ -2,3 +2,4 @@ node_modules/
 types/
 dist/
 styles/
+yarn-error.log
