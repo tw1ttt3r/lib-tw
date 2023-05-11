@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import { terser } from 'rollup-plugin-terser';
 import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
+import copy from 'rollup-plugin-copy'
 import packageJson from "./package.json" assert { type: "json" };
 
 export default [
@@ -26,13 +27,18 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
+      copy({
+        targets: [
+          { src: 'README.md', dest: 'dist/' },
+        ]
+      }),
       terser()
     ],
   },
   {
     input: 'src/bundle.css',
     output: [
-        { file: "dist/main.css" }
+      { file: "dist/main.css" }
     ],
     plugins: [
         postcss({
