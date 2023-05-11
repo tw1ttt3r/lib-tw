@@ -3,7 +3,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from 'rollup-plugin-terser';
 import dts from "rollup-plugin-dts";
-import tailwind from "rollup-plugin-tailwindcss";
 import postcss from "rollup-plugin-postcss";
 import packageJson from "./package.json" assert { type: "json" };
 
@@ -27,14 +26,20 @@ export default [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      postcss({ extract: true, process: processScss}),
-      tailwind({
-        input: './styles/output.css', // required
-        // Tailor the emitted stylesheet to the bundle by removing any unused CSS
-        // (highly recommended when packaging for distribution).
-        purge: false,
-      }),
       terser()
+    ],
+  },
+  {
+    input: 'src/bundle.css',
+    output: [
+        { file: "dist/main.css" }
+    ],
+    plugins: [
+        postcss({
+          minimize: true,
+          inject: false,
+          extract: true
+        }),
     ],
   },
   {
