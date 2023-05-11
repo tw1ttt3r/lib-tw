@@ -1,5 +1,5 @@
 node_modules/
 types/
 dist/
-styles/
+src/bundle.css
 yarn-error.log
