@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react"
+import { MessageComponent } from "./message.types"
 
-export const Message: React.FC<{ name: String }> = ({name}) => {
-    if (!name) {
-      name = 'Mundo';
-    }
-    return (<h1 className='text-red-300 font-bold'>¡¡Hola {name}!!</h1>)
-}
+const Message: React.FC<MessageComponent> = ({ message }: MessageComponent) => <h1 className="font-bold text-red-500">Hola desde { message }</h1>
+
+export default Message
